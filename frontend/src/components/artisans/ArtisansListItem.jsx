@@ -2,8 +2,10 @@ import { Card, CardBody, CardHeader, Link } from '@nextui-org/react'
 import PropTypes from 'prop-types'
 
 function ArtisansListItem ({ artisan }) {
+  // Récupération des attributs de l'artisan
   const { name, description, slug, profilePicture } = artisan.attributes
   const imgUrl = process.env.REACT_APP_IMAGES_URL + profilePicture?.data?.attributes?.url
+
   return (
     <Card as={Link} className='max-w-[400px] min-h-[500px] flex flex-col flex-grow' href={`/artisans/${slug}`}>
       <CardHeader className='p-0'>

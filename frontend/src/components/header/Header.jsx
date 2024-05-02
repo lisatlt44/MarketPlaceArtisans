@@ -1,12 +1,19 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem } from '@nextui-org/react'
-import { AcmeLogo } from './AcmeLogo.jsx'
 import { useState } from 'react'
 import { useAuth } from '../../contexts/authContext.jsx'
+import { CartIcon } from '../../assets/icons/CartIcon.jsx'
+import { AcmeLogo } from '../../assets/images/AcmeLogo.jsx'
 
 function Header () {
+  // État pour gérer l'ouverture/fermeture du menu
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Récupération des données d'authentification depuis le contexte
   const { state: { isLoggedIn, user }, logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -28,13 +35,18 @@ function Header () {
           </Link>
         </NavbarItem>
         <NavbarItem>
+          <Link href='/dashboard'>
+            Tableau de bord
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
           <Link href='/artisans'>
             Artisans
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link href='/about'>
-            About
+            A propos
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -52,6 +64,11 @@ function Header () {
         isLoggedIn
           ? (
             <NavbarContent as='div' justify='end'>
+              <NavbarItem>
+                <Button as={Link} color='primary' href='/cart' variant='flat'>
+                  <span className='hidden sm:inline'>Mon panier</span> <CartIcon />
+                </Button>
+              </NavbarItem>
               <Dropdown placement='bottom-end'>
                 <DropdownTrigger>
                   <Avatar
@@ -66,11 +83,14 @@ function Header () {
                 </DropdownTrigger>
                 <DropdownMenu aria-label='Profile Actions' variant='flat'>
                   <DropdownItem key='profile' className='h-14 gap-2'>
-                    <p className='font-semibold'>Signed in as</p>
+                    <p className='font-semibold'>Connecté en tant que</p>
                     <p className='font-semibold'>{user.email}</p>
                   </DropdownItem>
-                  <DropdownItem key='logout' color='danger' onPress={logout}>
-                    Log Out
+                  <DropdownItem key='edit' href='/profile'>
+                    Voir mon profil
+                  </DropdownItem>
+                  <DropdownItem key='logout' color='danger' onPress={handleLogout}>
+                    Se déconnecter
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
@@ -78,12 +98,9 @@ function Header () {
             )
           : (
             <NavbarContent justify='end'>
-              <NavbarItem className='hidden lg:flex'>
-                <Link href='#'>Login</Link>
-              </NavbarItem>
               <NavbarItem>
                 <Button as={Link} color='primary' href='/authentication' variant='flat'>
-                  Sign Up
+                  Se connecter
                 </Button>
               </NavbarItem>
             </NavbarContent>
@@ -97,18 +114,23 @@ function Header () {
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <Link Link href='/services'>
-            Services
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link Link href='/about'>
-            About
+          <Link Link href='/dashboard'>
+            Tableau de bord
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>
           <Link Link href='/artisans'>
             Artisans
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link Link href='/about'>
+            A propos
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link Link href='/services'>
+            Services
           </Link>
         </NavbarMenuItem>
         <NavbarMenuItem>

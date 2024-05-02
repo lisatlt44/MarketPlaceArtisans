@@ -3,6 +3,7 @@ import ArtisansList from '../components/artisans/ArtisansList'
 import { useFetch } from '../hooks/Api'
 
 function Artisans () {
+  // Récupération des données des artisans depuis l'API
   const { response, error, isLoading } =
   useFetch('/artisans?populate=*')
 
@@ -18,7 +19,7 @@ function Artisans () {
 
   return (
     <div className='container mx-auto flex flex-col items-center justify-start'>
-      <h2 className='text-4xl py-6'>Nos Artisans</h2>
+      <h2 className='py-6 text-3xl font-semibold text-center'>Nos Artisans</h2>
       <ArtisansList artisans={response} />
     </div>
   )

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 
-// { attributes } = props.attributes
 function ArtisanHeader ({ attributes }) {
+  // Récupération de l'URL de l'image de profil de l'artisan
   const imgUrl =
   process.env.REACT_APP_IMAGES_URL + attributes.profilePicture?.data?.attributes?.url
 

@@ -2,8 +2,9 @@ import PropTypes from 'prop-types'
 import ArtisansListItem from './ArtisansListItem'
 
 function ArtisansList ({ artisans }) {
+  // Vérification si la liste des artisans est vide
   if (!artisans || artisans.length < 1) {
-    return 'No data'
+    return 'Pas de données'
   }
   return (
     <div className='flex flex-row flex-wrap gap-4 justify-center items-center my-6'>
